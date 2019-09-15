@@ -12,6 +12,7 @@ class PageContent extends React.Component {
   }
 
   render() {
+    console.log("hello", this.state.currentSong);
     return (
       <div
         style={{

@@ -7,9 +7,9 @@ export default class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      songUri: props.currentSong,
       currentPlaylist: "US Top 50",
-      songs: []
+      songs: [],
+      accessToken: ""
     };
     this.getSongs(this.state.currentPlaylist);
   }
@@ -32,13 +32,16 @@ export default class Sidebar extends Component {
         Authorization:
           // Get OAuth Token from:
           // https://developer.spotify.com/console/get-playlist/?playlist_id=59ZbFPES4DQwEjBpWHzrtC&market=&fields=
-          "Bearer BQD94xic1aEl_t_2aRYw_k5mTkeehM9JqnhNvJHNGjqnXo7wrg68VJTdXH0T9EzApVr6Nwb8OTFY325--OkbJlf7q_NhXj9sJpwn1jmge9bqMkKBqktHOh5BELSNOBOiK7-tzXMUpgKIPKCjgWu2xg"
+          "Bearer BQDpyoTXHmpqerSi_w9kwekewaVqlPB3oUspuOnQnvI5bsAZcI63Y1ByXcv5y7uoJuEfbzgTY76SDc0GicKpzfTnlH605D01TRMDww_sJaVJAV-EpK6EkYU4C6r3KaT-paijnDFPoEgcc78pmILXow"
+        // "Bearer " + this.state.accessToken
       }
     })
       .then(response => {
+        console.log(response);
         return response.json();
       })
       .then(myJson => {
+        console.log(myJson);
         this.props.clearSong();
         this.setState({
           songs: myJson.items.map(obj => ({
@@ -54,6 +57,28 @@ export default class Sidebar extends Component {
       });
   }
 
+  fetchSpotifyKey() {
+    const url = "https://accounts.spotify.com/api/token";
+    console.log("fetching spotify key...");
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization:
+          "2e4af3862b5643ceae92ac900d8f16a4:93fc728339374882920a6efc48baf79c"
+      },
+      body: {
+        grant_type: "client_credentials"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(myJson => {
+        console.log(myJson);
+        this.setState({ accessToken: myJson["access_token"] });
+      });
+  }
+
   generateSongButtons() {
     const { songs } = this.state;
     return songs.map((obj, index) => (
@@ -63,7 +88,7 @@ export default class Sidebar extends Component {
         songName={obj.name}
         artistNames={obj.artists}
         updatePlayer={obj.updatePlayer}
-        selected={obj.uri == this.state.songUri}
+        selected={obj.uri == this.props.currentSong}
       />
     ));
   }
@@ -84,7 +109,10 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const { songs, currentPlaylist, songUri } = this.state;
+    const { songs } = this.state;
+    const songUri = this.props.currentSong;
+    console.log("Access token: ", this.state.accessToken);
+    // this.fetchSpotifyKey();
     return (
       <div
         style={{
@@ -110,7 +138,7 @@ export default class Sidebar extends Component {
         {songs.length > 0 && (
           <div
             style={{
-              maxHeight: 400,
+              maxHeight: 500,
               overflowY: "scroll",
               margin: "16px 0px",
               background:
