@@ -83,6 +83,7 @@ export default class CountryMap extends Component {
     render() {
         return (
             <div>
+            what
                 <Map
                     center={mapCenter}
                     zoom={zoomLevel}

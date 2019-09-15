@@ -8,7 +8,9 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-leaflet": "^2.4.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "google-trends-api": "^4.9.0",
+    "spotify-web-api-js": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
