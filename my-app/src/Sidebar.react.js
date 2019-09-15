@@ -32,7 +32,7 @@ export default class Sidebar extends Component {
         Authorization:
           // Get OAuth Token from:
           // https://developer.spotify.com/console/get-playlist/?playlist_id=59ZbFPES4DQwEjBpWHzrtC&market=&fields=
-          "Bearer BQCoNAS3MBmEyR0T1wzH_yMaje57OC4BGRHB_Lbf9xvMEoYo9fZP0Igf1tVOwP_ExAOEIKvR7tEjHIeQbCsXSzHM7e_mqUGMnqQYPvCRBPrp2llhXWOr0P13Aoza2mK0GSpmqpQZd-cbrhmWt8Ab2Q"
+          "Bearer BQD94xic1aEl_t_2aRYw_k5mTkeehM9JqnhNvJHNGjqnXo7wrg68VJTdXH0T9EzApVr6Nwb8OTFY325--OkbJlf7q_NhXj9sJpwn1jmge9bqMkKBqktHOh5BELSNOBOiK7-tzXMUpgKIPKCjgWu2xg"
       }
     })
       .then(response => {
