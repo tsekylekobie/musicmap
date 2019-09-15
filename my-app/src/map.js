@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { Map, TileLayer, GeoJSON } from "react-leaflet";
+var songData = {
+    "70eFcWOvlMObDhURTqT4Fv": {'New Hampshire': 100, 'Utah': 70, 'District of Columbia': 66, 'Massachusetts': 65, 'Iowa': 62, 'Idaho': 61, 'Minnesota': 61, 'Michigan': 58, 'Washington': 54, 'Tennessee': 53, 'Nebraska': 52, 'Pennsylvania': 51, 'Maine': 47, 'South Carolina': 46, 'Wisconsin': 46, 'Connecticut': 45, 'New Jersey': 42, 'Maryland': 42, 'California': 42, 'Arkansas': 39, 'Ohio': 37, 'Colorado': 37, 'Indiana': 35, 'Arizona': 35, 'New York': 35, 'Florida': 34, 'Illinois': 33, 'Missouri': 33, 'Georgia': 32, 'Texas': 31, 'Virginia': 31, 'Kansas': 27, 'Kentucky': 24, 'North Carolina': 24, 'Mississippi': 22, 'Alabama': 22, 'Oregon': 21, 'Oklahoma': 21, 'Nevada': 19, 'Vermont': 0, 'Hawaii': 0, 'Wyoming': 0, 'Rhode Island': 0, 'Montana': 0, 'Alaska': 0, 'Louisiana': 0, 'New Mexico': 0, 'West Virginia': 0, 'Delaware': 0, 'North Dakota': 0, 'South Dakota': 0},
+    "2ksOAxtIxY8yElEWw8RhgK": {'Florida': 100, 'New Jersey': 77, 'Nevada': 71, 'Texas': 57, 'New York': 55, 'Arizona': 50, 'Massachusetts': 49, 'Connecticut': 49, 'Pennsylvania': 39, 'California': 39, 'Virginia': 39, 'Maryland': 36, 'Illinois': 35, 'North Carolina': 26, 'Washington': 24, 'Georgia': 19, 'Ohio': 18, 'Colorado': 11, 'Rhode Island': 0, 'Nebraska': 0, 'South Dakota': 0, 'West Virginia': 0, 'Hawaii': 0, 'Idaho': 0, 'Wisconsin': 0, 'New Mexico': 0, 'Kansas': 0, 'Arkansas': 0, 'Oregon': 0, 'Iowa': 0, 'Indiana': 0, 'Utah': 0, 'Oklahoma': 0, 'South Carolina': 0, 'Kentucky': 0, 'Louisiana': 0, 'Tennessee': 0, 'Minnesota': 0, 'Missouri': 0, 'Michigan': 0, 'Alaska': 0, 'Alabama': 0, 'District of Columbia': 0, 'Delaware': 0, 'Maine': 0, 'Mississippi': 0, 'Montana': 0, 'North Dakota': 0, 'New Hampshire': 0, 'Vermont': 0, 'Wyoming': 0},
+}
 var statesData = {
   type: "FeatureCollection",
   features: [
@@ -4392,41 +4396,46 @@ const stamenTonerTiles =
 const mapCenter = [37.8, -96];
 const zoomLevel = 4;
 const id_str = "mapbox.light";
-function getColor(d) {
-  return d > 1000
+function getColor(d, song) {
+    var popularity = 0;
+  if (songData[song] != null) {
+      var popularity = songData[song][d];
+  }
+
+  return popularity > 90
     ? "#800026"
-    : d > 500
+    : popularity > 80
     ? "#BD0026"
-    : d > 200
+    : popularity > 70
     ? "#E31A1C"
-    : d > 100
+    : popularity > 60
     ? "#FC4E2A"
-    : d > 50
+    : popularity > 40
     ? "#FD8D3C"
-    : d > 20
+    : popularity > 20
     ? "#FEB24C"
-    : d > 10
+    : popularity > 10
     ? "#FED976"
     : "#FFEDA0";
 }
-function style(feature) {
-  return {
-    fillColor: getColor(feature.properties.density),
-    weight: 2,
-    opacity: 1,
-    color: "white",
-    dashArray: "3",
-    fillOpacity: 0.7
-  };
-}
 export default class CountryMap extends Component {
+    style = (feature) => {
+      return {
+        fillColor: getColor(feature.properties.name, this.props.currentSong),
+        weight: 2,
+        opacity: 1,
+        color: "white",
+        dashArray: "3",
+        fillOpacity: 0.7
+      };
+    }
   render() {
     console.log(this.props.currentSong);
     return (
       <div>
         <Map center={mapCenter} zoom={zoomLevel}>
           <TileLayer url={stamenTonerTiles} id={id_str} />
-          <GeoJSON data={statesData} style={style} />
+          <GeoJSON data={statesData} style={this.style} />
         </Map>
       </div>
     );
