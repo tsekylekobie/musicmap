@@ -1,3 +1,4 @@
+### Music Map | HackMIT 2019
 ## Inspiration
 
 Have you ever wondered how popular a song is in the United States? With MusicMap, you can visualize the popularity of a song with a heatmap of Spotify's US/Global Top/Viral 50 songs. 
