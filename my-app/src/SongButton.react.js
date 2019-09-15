@@ -15,12 +15,12 @@ class SongButton extends React.Component {
     const artistNames = this.state.artistNames.join(", ");
     return (
       <Button
-        style={{ height: 40, width: 400, margin: "4px 4px" }}
-        variant="contained"
+        style={{ width: 390, margin: "4px 4px" }}
+        variant={this.props.selected ? "contained" : "outlined"}
         color="secondary"
         onClick={this.props.updatePlayer}
       >
-        {`${this.state.songName} by ${artistNames}`}
+        {`(${this.props.number}) ${this.state.songName} by ${artistNames}`}
       </Button>
     );
   }
