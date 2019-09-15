@@ -1,4 +1,3 @@
-### Music Map | HackMIT 2019
 ## Inspiration
 
 Have you ever wondered how popular a song is in the United States? With MusicMap, you can visualize the popularity of a song with a heatmap of Spotify's US/Global Top/Viral 50 songs. 
@@ -15,8 +14,13 @@ Have you ever wondered how popular a song is in the United States? With MusicMap
 * Leaflet Chloropleth Map
 
 ## Challenges we ran into
-* It sometimes didn't compile
-* Tried to use [Google Trends API](https://www.npmjs.com/package/google-trends-api), but we kept getting an error: `We're sorry, but you have sent too many requests to us recently. Please try again later.` Online, people said it's because a set of IP addresses might be sending too many requests. It kept not working, so we gave up using this API, but still integrated Google Trends regardless!
+* Tried to use an unofficial [Google Trends API](https://www.npmjs.com/package/google-trends-api), but we kept getting an error: `We're sorry, but you have sent too many requests to us recently. Please try again later.` Online, people said it's because a set of IP addresses might be sending too many requests. It kept not working, so we gave up using this API, but still integrated Google Trends regardless!
+* No official Google Trends API
+* Embedded Google Trends map was tiny (so we made our own!)
+* Accessing currently played song from Spotify Web Player
+* Registering Spotify application without web hosting
+* Collecting interesting data on an international scale
+
 
 ## Accomplishments that we're proud of
 * Learned how to create a React web app quickly
