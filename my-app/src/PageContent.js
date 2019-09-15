@@ -4,6 +4,13 @@ import Sidebar from "./Sidebar.react";
 import CountryMap from "./map.js";
 
 class PageContent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentSong: null
+    };
+  }
+
   render() {
     return (
       <div
@@ -16,9 +23,13 @@ class PageContent extends React.Component {
       >
         <div>
           <h1 style={{ margin: 0 }}>Music Map</h1>
-          <CountryMap />
+          <CountryMap currentSong={this.state.currentSong} />
         </div>
-        <Sidebar />
+        <Sidebar
+          currentSong={this.state.currentSong}
+          updateSong={x => this.setState({ currentSong: x })}
+          clearSong={() => this.setState({ currentSong: null })}
+        />
       </div>
     );
   }

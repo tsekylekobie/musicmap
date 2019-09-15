@@ -7,7 +7,7 @@ export default class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      songUri: null,
+      songUri: props.currentSong,
       currentPlaylist: "US Top 50",
       songs: []
     };
@@ -39,24 +39,23 @@ export default class Sidebar extends Component {
         return response.json();
       })
       .then(myJson => {
+        this.props.clearSong();
         this.setState({
           songs: myJson.items.map(obj => ({
             uri: obj.track.uri.substring(14),
             name: obj.track.name,
             artists: obj.track.artists.map(x => x.name),
             updatePlayer: () => {
-              this.setState({ songUri: obj.track.uri.substring(14) });
+              this.props.updateSong(obj.track.uri.substring(14));
             }
           })),
-          currentPlaylist: playlistName,
-          songUri: null
+          currentPlaylist: playlistName
         });
       });
   }
 
   generateSongButtons() {
     const { songs } = this.state;
-    console.log(songs);
     return songs.map((obj, index) => (
       <SongButton
         key={obj.uri}

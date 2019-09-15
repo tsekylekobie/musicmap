@@ -4421,7 +4421,7 @@ function style(feature) {
 }
 export default class CountryMap extends Component {
   render() {
-    console.log("rendering country map...");
+    console.log(this.props.currentSong);
     return (
       <div>
         <Map center={mapCenter} zoom={zoomLevel}>
