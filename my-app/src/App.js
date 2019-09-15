@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar.react";
 import Playlist from "./Playlist.js";
+import CountryMap from "./map.js";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         padding: 16
       }}
     >
+      <CountryMap />
       <h1 style={{ margin: 0 }}>Music Map</h1>
       <Sidebar />
       <Playlist

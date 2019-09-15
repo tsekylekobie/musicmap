@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Sidebar from "./Sidebar.react";
+import CountryMap from "./map.js";
 
 class PageContent extends React.Component {
   render() {
@@ -13,7 +14,10 @@ class PageContent extends React.Component {
           padding: 16
         }}
       >
-        <h1 style={{ margin: 0 }}>Music Map</h1>
+        <div>
+          <h1 style={{ margin: 0 }}>Music Map</h1>
+          <CountryMap />
+        </div>
         <Sidebar />
       </div>
     );
