@@ -15,26 +15,19 @@ const useStyles = makeStyles(theme => ({
 class PlaylistButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playlistName: props.playlistName,
-      embedCode: props.embedCode
-    };
   }
 
-  /* Update Playlist in PageContent. */
-  updatePlaylist = () => {
-    this.props.updatePlaylist(this.state.embedCode);
-  };
-
   render() {
+    const { playlistName, onClick } = this.props;
+
     return (
       <Button
         style={{ height: "40px", margin: "4px 4px" }}
         variant="contained"
         color="primary"
-        onClick={this.updatePlaylist}
+        onClick={onClick}
       >
-        {this.state.playlistName}
+        {playlistName}
       </Button>
     );
   }
